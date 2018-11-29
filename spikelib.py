@@ -1,7 +1,7 @@
 def mean_rate(spikes, samplingrate):
     spikecount = sum(spikes)
     bincount = len(spikes)
-    return spikecount / bincount / samplingrate
+    return spikecount / bincount * samplingrate
 
 def create_testfile():
     pass
