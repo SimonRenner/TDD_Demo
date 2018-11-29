@@ -3,7 +3,7 @@ from spike_analysis import pipeline
 from mock import patch
 from os.path import isfile, dirname, abspath
 from os import remove
-from pytest import fixture
+from pytest import fixture, raises
 
 def test_mean_rate_pipeline_end_to_end(create_testfile, read_testfile):
     testfilename = 'testfile'
@@ -40,3 +40,15 @@ def test_importable_pipeline(create_testfile, read_testfile):
     assert not isfile(testfilepath + testfilename)
     assert not isfile(testfilepath + testfilename_analyzed)
     
+def test_importable_pipeline_raises_error_if_no_commandline_argument_is_supplied(create_testfile, read_testfile):
+    testfilename = 'testfile.txt'
+    testfilepath = dirname(abspath(__file__))[:-5] + 'data/'
+    line1 = '50\n'
+    line2 = '100011010'
+    mrate = 4 / 9 * 50
+    empty_argument = []
+    create_testfile(testfilepath + testfilename, line1, line2)
+    with raises(Exception):
+        pipeline.main(empty_argument)
+    remove(testfilepath + testfilename)
+    assert not isfile(testfilepath + testfilename)

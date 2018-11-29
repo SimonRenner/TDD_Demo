@@ -11,4 +11,4 @@ def main(filename):
     save_data(filepath + filename_analyzed, mrate)
     
 if __name__ == '__main__':
-    main()
+    main(argv[1:])
