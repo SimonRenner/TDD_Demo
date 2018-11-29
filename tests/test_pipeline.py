@@ -4,22 +4,6 @@ from os.path import isfile
 from os import remove
 from pytest import fixture
 
-@fixture
-def create_testfile():
-    def _create_testfile(filename, line1, line2):
-        with open(filename, 'w') as f:
-            f.write(line1)
-            f.write(line2)
-    return _create_testfile
-
-@fixture
-def read_testfile():
-    def _read_testfile(filename):
-        with open(filename, 'r') as f:
-            content = f.read()
-        return float(content)
-    return _read_testfile
-
 def test_mean_rate_pipeline_end_to_end(create_testfile, read_testfile):
     testfilename = 'testfile'
     line1 = '40\n'
