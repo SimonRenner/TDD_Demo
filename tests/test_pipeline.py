@@ -12,7 +12,15 @@ def create_testfile():
             f.write(line2)
     return _create_testfile
 
-def test_mean_rate_pipeline_end_to_end(create_testfile):
+@fixture
+def read_testfile():
+    def _read_testfile(filename):
+        with open(filename, 'r') as f:
+            content = f.read()
+        return float(content)
+    return _read_testfile
+
+def test_mean_rate_pipeline_end_to_end(create_testfile, read_testfile):
     testfilename = 'testfile'
     line1 = '40\n'
     line2 = '101110'
@@ -26,8 +34,7 @@ def test_mean_rate_pipeline_end_to_end(create_testfile):
     assert mrate == 4 / 6 * 40
     testfilename_analyzed = 'testfile_ana'
     save_data(testfilename_analyzed, mrate)
-    with open(testfilename_analyzed, 'r') as file:
-        read_mrate = file.read()
-    assert str(mrate) == read_mrate
+    read_mrate = read_testfile(testfilename_analyzed)
+    assert mrate == read_mrate
     remove(testfilename_analyzed)
     assert not isfile(testfilename_analyzed)
