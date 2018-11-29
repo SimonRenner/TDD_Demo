@@ -5,4 +5,4 @@
 - pytest 4.0.0
 - mock 2.0.0 
 
-To follow the tutorial, go through the commits, run pytest to see what fails and try to make sense of the changes made to make tests pass.
+To follow the tutorial, go through the commits, run pytest to see what fails and try to make sense of the changes made to make tests pass. You can also find the slides of the presentation as an ipython notebook in the repo.
