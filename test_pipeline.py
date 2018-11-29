@@ -21,4 +21,4 @@ def test_mean_rate_pipeline_end_to_end(read_data):
         read_mrate = file.read()
     assert str(mrate) == read_mrate
     remove(testfilename_analyzed)
-    assert exists(testfilename_analyzed)
+    assert not isfile(testfilename_analyzed)
