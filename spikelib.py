@@ -8,3 +8,6 @@ def create_testfile():
 
 def read_data(filename):
     return spikes, samplingrate
+
+def save_data(filename):
+    pass
