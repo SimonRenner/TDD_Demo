@@ -3,8 +3,7 @@ from mock import patch
 from os.path import isfile
 from os import remove
 
-@patch('spike_analysis.spikelib.read_data', return_value = ([1,0,1,1,1,0], 40))
-def test_mean_rate_pipeline_end_to_end(read_data):
+def test_mean_rate_pipeline_end_to_end():
     testfilename = 'testfile'
     with open(testfilename, 'w') as file:
         file.write('40\n')
