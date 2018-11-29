@@ -2,12 +2,21 @@ from spike_analysis.spikelib import mean_rate, read_data, save_data
 from mock import patch
 from os.path import isfile
 from os import remove
+from pytest import fixture
 
-def test_mean_rate_pipeline_end_to_end():
+@fixture
+def create_testfile():
+    def _create_testfile(filename, line1, line2):
+        with open(filename, 'w') as f:
+            f.write(line1)
+            f.write(line2)
+    return _create_testfile
+
+def test_mean_rate_pipeline_end_to_end(create_testfile):
     testfilename = 'testfile'
-    with open(testfilename, 'w') as file:
-        file.write('40\n')
-        file.write('101110')
+    line1 = '40\n'
+    line2 = '101110'
+    create_testfile(testfilename, line1, line2)
     spikes, samplingrate = read_data(testfilename)
     remove(testfilename)
     assert not isfile(testfilename)
