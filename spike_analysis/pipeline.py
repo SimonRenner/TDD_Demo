@@ -5,10 +5,13 @@ from sys import argv
 filepath = dirname(abspath(__file__))[:-14] + 'data/'
 
 def main(filename):
-    spikes, samplingrate = read_data(filepath + filename)
-    mrate = mean_rate(spikes, samplingrate)
-    filename_analyzed = filename[:-4] + '_rate.txt'
-    save_data(filepath + filename_analyzed, mrate)
+    if filename == []:
+        raise NameError('no filename to analyze specified')
+    else:
+        spikes, samplingrate = read_data(filepath + filename)
+        mrate = mean_rate(spikes, samplingrate)
+        filename_analyzed = filename[:-4] + '_rate.txt'
+        save_data(filepath + filename_analyzed, mrate)
     
 if __name__ == '__main__':
     main(argv[1:])
