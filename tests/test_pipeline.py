@@ -11,8 +11,8 @@ def test_mean_rate_pipeline_end_to_end():
     spikes, samplingrate = read_data(testfilename)
     remove(testfilename)
     assert not isfile(testfilename)
-    assert spikes == [1,0,1,1,1,0]
     assert samplingrate == 40
+    assert spikes == [1,0,1,1,1,0]
     mrate = mean_rate(spikes, samplingrate)
     assert mrate == 4 / 6 * 40
     testfilename_analyzed = 'testfile_ana'
