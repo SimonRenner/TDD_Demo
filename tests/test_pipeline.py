@@ -6,8 +6,9 @@ from os import remove
 @patch('spike_analysis.spikelib.read_data', return_value = ([1,0,1,1,1,0], 40))
 def test_mean_rate_pipeline_end_to_end(read_data):
     testfilename = 'testfile'
-    with open(testfilename, 'w'):
-        pass
+    with open(testfilename, 'w') as file:
+        file.write('40\n')
+        file.write('101110')
     spikes, samplingrate = read_data(testfilename)
     remove(testfilename)
     assert not isfile(testfilename)
