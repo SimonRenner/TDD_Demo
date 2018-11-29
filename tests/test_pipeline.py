@@ -1,6 +1,7 @@
 from spike_analysis.spikelib import mean_rate, read_data, save_data
+from spike_analysis import pipeline
 from mock import patch
-from os.path import isfile
+from os.path import isfile, dirname, abspath
 from os import remove
 from pytest import fixture
 
@@ -22,3 +23,20 @@ def test_mean_rate_pipeline_end_to_end(create_testfile, read_testfile):
     assert mrate == read_mrate
     remove(testfilename_analyzed)
     assert not isfile(testfilename_analyzed)
+    
+def test_importable_pipeline(create_testfile, read_testfile):
+    testfilename = 'testfile.txt'
+    testfilepath = dirname(abspath(__file__))[:-5] + 'data/'
+    line1 = '50\n'
+    line2 = '100011010'
+    mrate = 4 / 9 * 50
+    create_testfile(testfilepath + testfilename, line1, line2)
+    pipeline.main(testfilename)
+    testfilename_analyzed = 'testfile_rate.txt'
+    read_mrate = read_testfile(testfilepath + testfilename_analyzed)
+    assert read_mrate == mrate
+    remove(testfilepath + testfilename)
+    remove(testfilepath + testfilename_analyzed)
+    assert not isfile(testfilepath + testfilename)
+    assert not isfile(testfilepath + testfilename_analyzed)
+    
