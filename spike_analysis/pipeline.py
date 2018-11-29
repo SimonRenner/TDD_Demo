@@ -8,6 +8,7 @@ def main(filename):
     if filename == []:
         raise NameError('no filename to analyze specified')
     else:
+        filename = filename[0]
         spikes, samplingrate = read_data(filepath + filename)
         mrate = mean_rate(spikes, samplingrate)
         filename_analyzed = filename[:-4] + '_rate.txt'
