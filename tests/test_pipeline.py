@@ -1,9 +1,9 @@
-from spikelib import mean_rate, read_data, save_data
+from spike_analysis.spikelib import mean_rate, read_data, save_data
 from mock import patch
 from os.path import isfile
 from os import remove
 
-@patch('spikelib.read_data', return_value = ([1,0,1,1,1,0], 40))
+@patch('spike_analysis.spikelib.read_data', return_value = ([1,0,1,1,1,0], 40))
 def test_mean_rate_pipeline_end_to_end(read_data):
     testfilename = 'testfile'
     with open(testfilename, 'w'):

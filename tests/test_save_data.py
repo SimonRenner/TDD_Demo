@@ -1,4 +1,4 @@
-from spikelib import save_data
+from spike_analysis.spikelib import save_data
 from os import remove
 from os.path import isfile
 
